@@ -101,11 +101,8 @@ Masaüstü, tablet ve mobil cihazlarda sorunsuz çalışır. Kategori butonları
 </p>
 
 ### 🎬 Tanıtım Videosu
-<p align="center">
-  <video src="assets/leon_demo.mp4" width="100%" controls autoplay muted loop>
-    Tarayıcınız video oynatmayı desteklemiyor.
-  </video>
-</p>
+
+https://github.com/Muhammedokbi/LEON/raw/main/assets/leon_demo.mp4
 
 ---
 
@@ -195,13 +192,28 @@ LEON/
 
 ---
 
-## 🔮 Gelecek Planları
+## 🔮 Gelecek Planları (Roadmap)
 
-- [ ] Sayfalama (Pagination) — 500 kartı sayfalara bölme
-- [ ] Favorilere ekleme özelliği
+### 🔐 Faz 1 — Kullanıcı Kayıt Sistemi
+- [ ] Kullanıcı kayıt ve giriş (Sign Up / Login) sistemi
+- [ ] Admin paneli — Kullanıcı yönetimi, içerik moderasyonu
+- [ ] Normal kullanıcı paneli — Profil, favoriler, geçmiş
+
+### 🤖 Faz 2 — Yapay Zeka (LLM) Entegrasyonu
+- [ ] Kayıtlı kullanıcılara özel **Linux danışman LLM** (AI asistan)
+- [ ] "Hangi Linux bana uygun?" kişiselleştirilmiş öneri sistemi
+- [ ] Dağıtım hakkında sohbet edebilme (Chat özelliği)
+
+### 💻 Faz 3 — Canlı Demo Sistemi
+- [ ] Siteden doğrudan Linux dağıtımlarını **demo olarak deneyebilme**
+- [ ] Tarayıcı üzerinden sanal makine veya container tabanlı önizleme
+- [ ] Kayıt yapan kullanıcıların istedikleri Linux'u denemesi
+
+### 💰 Faz 4 — Premium Özellikler
+- [ ] Premium kayıt sistemi (ücretli üyelik)
+- [ ] Premium kullanıcılara özel gelişmiş LLM erişimi
+- [ ] Özel sohbet odaları ve topluluk forumu
 - [ ] Dağıtım karşılaştırma aracı
-- [ ] Daha fazla masaüstü ortamı görseli
-- [ ] PWA (Progressive Web App) desteği
 
 ---
 
