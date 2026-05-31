@@ -78,8 +78,8 @@ async function fetchDistros() {
     
     // Mutate data for search tags
     distros.forEach(d => {
-      d.tr.tags = [d.tr.badge, d.base, d.desktop];
-      d.en.tags = [d.en.badge, d.base, d.desktop];
+      d.tr.tags = [d.tr.badge, d.tr.base || '', d.tr.desktop || ''].filter(Boolean);
+      d.en.tags = [d.en.badge, d.en.base || '', d.en.desktop || ''].filter(Boolean);
     });
     
     return true;
