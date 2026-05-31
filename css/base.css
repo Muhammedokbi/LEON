@@ -1,0 +1,117 @@
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root {
+  --bg: #0a0a0b;
+  --bg2: #111114;
+  --bg3: #1a1a1f;
+  --surface: #1e1e24;
+  --surface2: #252530;
+  --border: rgba(255,255,255,0.08);
+  --border2: rgba(255,255,255,0.14);
+  --text: #e8e8f0;
+  --text2: #9090a8;
+  --text3: #5a5a70;
+  --accent: #c8ff00;
+  --accent2: #7fffb2;
+  --accent-dim: rgba(200,255,0,0.12);
+  --red: #ff5f5f;
+  --blue: #5fb8ff;
+  --purple: #b87fff;
+  --orange: #ffab5f;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-display: 'Syne', sans-serif;
+  --radius: 12px;
+  --radius-lg: 20px;
+  --trans: 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+
+[data-theme="light"] {
+  --bg: #f4f4f0;
+  --bg2: #e8e8e2;
+  --bg3: #ddddd6;
+  --surface: #ffffff;
+  --surface2: #f0f0ea;
+  --border: rgba(0,0,0,0.08);
+  --border2: rgba(0,0,0,0.14);
+  --text: #111118;
+  --text2: #555560;
+  --text3: #9090a0;
+  --accent: #2a7a00;
+  --accent2: #006640;
+  --accent-dim: rgba(42,122,0,0.1);
+}
+
+html { scroll-behavior: smooth }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-mono);
+  min-height: 100vh;
+  overflow-x: hidden;
+  transition: background var(--trans), color var(--trans);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);
+  pointer-events: none;
+  z-index: 9999;
+}
+[data-theme="light"] body::before { opacity: 0.3 }
+
+.bg-grid {
+  position: fixed;
+  inset: 0;
+  background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.corner {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  opacity: 0.3;
+}
+.corner-tl { top: 80px; left: 30px; border-top: 1px solid var(--accent); border-left: 1px solid var(--accent) }
+.corner-br { bottom: 30px; right: 30px; border-bottom: 1px solid var(--accent); border-right: 1px solid var(--accent) }
+
+.float-nums {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.fnum {
+  position: absolute;
+  font-size: 0.65rem;
+  color: var(--text3);
+  opacity: 0.4;
+  font-variant-numeric: tabular-nums;
+}
+
+.version-tag {
+  position: fixed;
+  bottom: 25px;
+  left: 30px;
+  font-size: 0.65rem;
+  color: var(--accent);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.version-tag::before {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 1px;
+  background: var(--accent);
+  opacity: 0.5;
+}
