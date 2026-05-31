@@ -5,7 +5,7 @@
 <h1 align="center">🐧 LEON — Linux Encyclopedia</h1>
 
 <p align="center">
-  <b>Documentation System v6.0 (Encyclopedia Edition)</b><br>
+  <b>Documentation System v1.2</b><br>
   <i>Linux Enterprise Open Network</i>
 </p>
 
@@ -102,7 +102,13 @@ Masaüstü, tablet ve mobil cihazlarda sorunsuz çalışır. Kategori butonları
 
 ### 🎬 Tanıtım Videosu
 
-https://github.com/Muhammedokbi/LEON/raw/main/assets/leon_demo.mp4
+<p align="center">
+  <img src="assets/leon_preview.gif" alt="Leon Tanıtım" width="100%">
+</p>
+
+<p align="center">
+  <a href="https://github.com/Muhammedokbi/LEON/blob/main/assets/leon_demo.mp4">📹 Tam videoyu izle (HD)</a>
+</p>
 
 ---
 
