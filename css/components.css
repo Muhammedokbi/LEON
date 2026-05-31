@@ -174,3 +174,71 @@ body.modal-open { overflow: hidden }
 .terminal-code { padding: 1rem; color: #e6edf3; font-size: 0.85rem; overflow-x: auto; white-space: pre-wrap; }
 .terminal-code::before { content: '$ '; color: #3fb950; font-weight: bold; }
 .terminal-desc { background: #161b22; padding: 0.6rem 1rem; font-size: 0.75rem; color: #8b949e; border-top: 1px dashed #30363d; }
+
+/* Category Filters */
+.category-filters {
+  display: flex;
+  gap: 0.6rem;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  scrollbar-width: none;
+}
+.category-filters::-webkit-scrollbar { display: none; }
+.cat-btn {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text2);
+  padding: 0.6rem 1.2rem;
+  border-radius: 20px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all var(--trans);
+}
+.cat-btn:hover {
+  border-color: var(--border2);
+  color: var(--text);
+}
+.cat-btn.active {
+  background: var(--accent-dim);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* Download Button */
+.download-iso-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  background: linear-gradient(135deg, var(--accent), #e2ff40);
+  color: #000;
+  padding: 0.9rem 2rem;
+  border-radius: 12px;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  margin-top: 1.5rem;
+  transition: all var(--trans);
+  box-shadow: 0 4px 15px rgba(200,255,0,0.2), inset 0 2px 0 rgba(255,255,255,0.4);
+}
+.download-iso-btn svg { width: 20px; height: 20px; }
+.download-iso-btn:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 10px 30px rgba(200,255,0,0.4), inset 0 2px 0 rgba(255,255,255,0.6);
+}
+.download-iso-btn:active {
+  transform: translateY(1px) scale(0.98);
+}
+[data-theme="light"] .download-iso-btn {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(42,122,0,0.2);
+}
+[data-theme="light"] .download-iso-btn:hover {
+  box-shadow: 0 10px 30px rgba(42,122,0,0.4);
+}

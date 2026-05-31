@@ -4,11 +4,14 @@ import urllib.error
 import random
 import re
 
+# Categories available: "daily" (Gündelik), "gaming" (Oyun), "hack" (Siber Güvenlik), "server" (Sunucu), "developer" (Geliştirici)
+
 # --- 1. THE 25 HIGHLY DETAILED DISTROS ---
 detailed_distros = [
     {
         "id": "arch", "name": "Arch Linux", "icon": "🏔️", "desktops": ["kde", "gnome", "xfce"], 
         "color": "#1793d1", "colorDim": "rgba(23,147,209,0.12)", "badgeColor": "#1793d1", "year": "2002", "kernel": "Linux",
+        "category": "developer", "downloadUrl": "https://archlinux.org/download/",
         "tr": {
             "tagline": "Kendin yap felsefesiyle inşa edilen minimalist ve tam kontrollü sistem.", "badge": "İleri Seviye", "founder": "Judd Vinet", "base": "Bağımsız", "pkgMgr": "pacman", "desktop": "Yok", 
             "useCases": ["İleri düzey kullanıcılar", "Sistem mimarisini öğrenmek isteyenler", "Performans tutkunları"], 
@@ -51,6 +54,7 @@ detailed_distros = [
     {
         "id": "ubuntu", "name": "Ubuntu", "icon": "🟠", "desktops": ["gnome", "kde", "xfce"], 
         "color": "#E95420", "colorDim": "rgba(233,84,32,0.12)", "badgeColor": "#E95420", "year": "2004", "kernel": "Linux",
+        "category": "daily", "downloadUrl": "https://ubuntu.com/download/desktop",
         "tr": {
             "tagline": "Dünyanın en popüler dağıtımı. Masaüstünden buluta devasa ekosistem.", "badge": "Başlangıç Dostu", "founder": "Canonical", "base": "Debian", "pkgMgr": "apt + snap", "desktop": "GNOME", 
             "useCases": ["Yeni başlayanlar", "Geliştiriciler", "Sunucu Yöneticileri"], 
@@ -90,39 +94,40 @@ detailed_distros = [
     }
 ]
 
-# We include the rest of our hand-crafted top distros from previous step here (truncated for brevity but fully populated)
 more_distros_data = [
-    ("Linux Mint", "🌿", "Ubuntu", "apt", "Cinnamon", "Clement Lefebvre", "Windows'a benzeyen arayüzü ile acemiler için vazgeçilmez.", ["Ev Kullanıcıları"], ["Çok Kararlı", "Flatpak yüklü"], ["Eski paketler"]),
-    ("Fedora", "🎩", "Bağımsız", "dnf", "GNOME", "Red Hat", "En güncel teknolojilerin inovasyon merkezi.", ["Geliştiriciler"], ["Saf GNOME", "Wayland"], ["Topluluk nispeten küçük"]),
-    ("Debian", "🌀", "Bağımsız", "apt", "GNOME", "Ian Murdock", "Evrensel, çökmez ve ultra kararlı.", ["Sunucular"], ["Kaya gibi sağlam", "Milyonlarca paket"], ["Paketler yıllanmış"]),
-    ("openSUSE", "🦎", "Bağımsız", "zypper", "KDE", "SUSE", "YaST kontrol paneline sahip efsane.", ["Sistem Yöneticileri"], ["YaST", "Btrfs Snapshots"], ["Oyunlara odaklanmaz"]),
-    ("Manjaro", "📦", "Arch Linux", "pacman", "XFCE", "Philip Müller", "Arch Linux'un son kullanıcı için evcilleştirilmiş hali.", ["Oyuncular"], ["Sürücüler hazır", "AUR Desteği"], ["Paket çakışmaları"]),
-    ("EndeavourOS", "🚀", "Arch Linux", "yay", "None", "Bryanpwo", "Terminale sadık 5 dakikada kurulan saf Arch.", ["İleri Düzey"], ["Arch depoları", "Yay yüklü"], ["Grafik mağaza yok"]),
-    ("Pop!_OS", "💻", "Ubuntu", "apt", "COSMIC", "System76", "Nvidia kullanan oyuncular ve yazılımcılar için.", ["Oyuncular"], ["Nvidia gömülü", "Tiling"], ["Ubuntu tabanlı"]),
-    ("Kali Linux", "🐉", "Debian", "apt", "XFCE", "Offensive Security", "Siber güvenlikçilerin ve hackerların efsanesi.", ["Hackerlar"], ["Yüzlerce Hack aracı"], ["Gündelik kullanılamaz"]),
-    ("Alpine Linux", "⛰️", "Bağımsız", "apk", "None", "Natanael Copa", "Konteynerlar için ultra güvenli, aşırı hafif sistem.", ["Docker"], ["150 MB", "Musl libc"], ["Oyun açmaz"]),
-    ("NixOS", "❄️", "Bağımsız", "nix", "KDE", "Eelco Dolstra", "Tek bir text dosyası ile tüm işletim sistemini kuran devrim.", ["DevOps"], ["Deklaratif", "Geri sarma"], ["Öğrenmesi çok zor"]),
-    ("Zorin OS", "💎", "Ubuntu", "apt", "GNOME", "Artyom Zorin", "Mac ve Windows tasarımını kopyalayan estetik harikası.", ["Windows'tan geçenler"], ["Çok şık", "Windows Layout"], ["Pro sürüm paralı"]),
-    ("Parrot OS", "🦜", "Debian", "apt", "MATE", "Lorenzo Cappeletti", "Kali'nin daha hafif, günlük kullanılabilen kardeşi.", ["Güvenlik Uzmanları"], ["Anonsurf", "Çok hafif"], ["Kali kadar ünlü değil"]),
-    ("Gentoo", "🧲", "Bağımsız", "portage", "None", "Daniel Robbins", "Her şeyin işlemcinize özel saatlerce derlendiği uzman sistemi.", ["Uzmanlar"], ["Ultra Hız", "Sınırsız Özelleştirme"], ["Kurulumu günler sürer"]),
-    ("elementary OS", "🪄", "Ubuntu", "apt", "Pantheon", "Daniel Foré", "Mac benzeri zarif tasarımıyla dikkat çeken, estetik odaklı sistem.", ["Tasarım Odaklılar"], ["Kendi özel uygulama mağazası çok şık"], ["Özelleştirmeye çok kapalıdır"]),
-    ("Void Linux", "🌌", "Bağımsız", "xbps", "None", "Juan Romero Pardines", "systemd kullanmayan (runit kullanan), inanılmaz hızlı Unix.", ["Deneyimli Unix Severler"], ["İnanılmaz hızlı açılış"], ["Topluluğu küçüktür"]),
-    ("KDE Neon", "💡", "Ubuntu", "apt", "KDE", "KDE Project", "KDE Plasma'nın en saf ve güncel sürümü.", ["KDE Aşıkları"], ["En son KDE özellikleri"], ["Sadece KDE araçları var"]),
-    ("Tails", "👻", "Debian", "apt", "GNOME", "Topluluk", "USB'den çalışan ve arkasında iz bırakmayan gizlilik sistemi.", ["Aktivistler"], ["Tam Tor entegrasyonu", "İz bırakmaz"], ["Gündelik kullanıma uymaz"]),
-    ("MX Linux", "🛠️", "Debian", "apt", "XFCE", "antiX", "Eski bilgisayarları dirilten harika araçlara sahip sistem.", ["Eski Bilgisayarlar"], ["MX Tools", "Hızlı"], ["Tasarım eski"]),
-    ("Garuda Linux", "🦅", "Arch Linux", "pacman", "KDE", "Shrinivas Kumbhar", "RGB neon tasarımıyla dikkat çeken oyuncu Arch'ı.", ["Oyuncular"], ["Neon tasarım", "Oyun araçları yüklü"], ["Çok RAM harcar"]),
-    ("Solus", "⛵", "Bağımsız", "eopkg", "Budgie", "Ikey Doherty", "Sıfırdan yazılmış ev kullanıcısı odaklı sistem.", ["Ev Kullanıcıları"], ["Eopkg çok hızlı", "Budgie harika"], ["Yazılım deposu dardır"]),
-    ("Slackware", "🦕", "Bağımsız", "slackpkg", "None", "Patrick Volkerding", "Hayatta olan en eski Linux dağıtımı.", ["Tarihçiler"], ["Kaya gibi sağlam", "Klasik Unix felsefesi"], ["Bağımlılık çözmek kabustur"]),
-    ("Rocky Linux", "⛰️", "RHEL", "dnf", "None", "Gregory Kurtzer", "CentOS'un devamı niteliğindeki kurumsal dev.", ["Sunucular"], ["%100 Red Hat uyumlu"], ["Paketler çok eski"]),
-    ("Puppy Linux", "🐶", "Various", "pet", "JWM", "Barry Kauler", "Sadece RAM üzerinde (disk olmadan) çalışan ufaklık.", ["Kurtarma CD'si"], ["Aşırı küçük ve hızlı"], ["Root olarak çalışır, güvensiz"])
+    ("Linux Mint", "🌿", "Ubuntu", "apt", "Cinnamon", "Clement Lefebvre", "daily", "https://linuxmint.com/download.php", "Windows'a benzeyen arayüzü ile acemiler için vazgeçilmez.", ["Ev Kullanıcıları"], ["Çok Kararlı", "Flatpak yüklü"], ["Eski paketler"]),
+    ("Fedora", "🎩", "Bağımsız", "dnf", "GNOME", "Red Hat", "developer", "https://fedoraproject.org/workstation/download/", "En güncel teknolojilerin inovasyon merkezi.", ["Geliştiriciler"], ["Saf GNOME", "Wayland"], ["Topluluk nispeten küçük"]),
+    ("Debian", "🌀", "Bağımsız", "apt", "GNOME", "Ian Murdock", "server", "https://www.debian.org/download", "Evrensel, çökmez ve ultra kararlı.", ["Sunucular"], ["Kaya gibi sağlam", "Milyonlarca paket"], ["Paketler yıllanmış"]),
+    ("openSUSE", "🦎", "Bağımsız", "zypper", "KDE", "SUSE", "server", "https://get.opensuse.org/", "YaST kontrol paneline sahip efsane.", ["Sistem Yöneticileri"], ["YaST", "Btrfs Snapshots"], ["Oyunlara odaklanmaz"]),
+    ("Manjaro", "📦", "Arch Linux", "pacman", "XFCE", "Philip Müller", "gaming", "https://manjaro.org/download/", "Arch Linux'un son kullanıcı için evcilleştirilmiş hali.", ["Oyuncular"], ["Sürücüler hazır", "AUR Desteği"], ["Paket çakışmaları"]),
+    ("EndeavourOS", "🚀", "Arch Linux", "yay", "None", "Bryanpwo", "developer", "https://endeavouros.com/latest-release/", "Terminale sadık 5 dakikada kurulan saf Arch.", ["İleri Düzey"], ["Arch depoları", "Yay yüklü"], ["Grafik mağaza yok"]),
+    ("Pop!_OS", "💻", "Ubuntu", "apt", "COSMIC", "System76", "gaming", "https://pop.system76.com/", "Nvidia kullanan oyuncular ve yazılımcılar için.", ["Oyuncular"], ["Nvidia gömülü", "Tiling"], ["Ubuntu tabanlı"]),
+    ("Kali Linux", "🐉", "Debian", "apt", "XFCE", "Offensive Security", "hack", "https://www.kali.org/get-kali/", "Siber güvenlikçilerin ve hackerların efsanesi.", ["Hackerlar"], ["Yüzlerce Hack aracı"], ["Gündelik kullanılamaz"]),
+    ("Alpine Linux", "⛰️", "Bağımsız", "apk", "None", "Natanael Copa", "server", "https://alpinelinux.org/downloads/", "Konteynerlar için ultra güvenli, aşırı hafif sistem.", ["Docker"], ["150 MB", "Musl libc"], ["Oyun açmaz"]),
+    ("NixOS", "❄️", "Bağımsız", "nix", "KDE", "Eelco Dolstra", "developer", "https://nixos.org/download.html", "Tek bir text dosyası ile tüm işletim sistemini kuran devrim.", ["DevOps"], ["Deklaratif", "Geri sarma"], ["Öğrenmesi çok zor"]),
+    ("Zorin OS", "💎", "Ubuntu", "apt", "GNOME", "Artyom Zorin", "daily", "https://zorin.com/os/download/", "Mac ve Windows tasarımını kopyalayan estetik harikası.", ["Windows'tan geçenler"], ["Çok şık", "Windows Layout"], ["Pro sürüm paralı"]),
+    ("Parrot OS", "🦜", "Debian", "apt", "MATE", "Lorenzo Cappeletti", "hack", "https://parrotsec.org/download/", "Kali'nin daha hafif, günlük kullanılabilen kardeşi.", ["Güvenlik Uzmanları"], ["Anonsurf", "Çok hafif"], ["Kali kadar ünlü değil"]),
+    ("Gentoo", "🧲", "Bağımsız", "portage", "None", "Daniel Robbins", "developer", "https://www.gentoo.org/downloads/", "Her şeyin işlemcinize özel saatlerce derlendiği uzman sistemi.", ["Uzmanlar"], ["Ultra Hız", "Sınırsız Özelleştirme"], ["Kurulumu günler sürer"]),
+    ("elementary OS", "🪄", "Ubuntu", "apt", "Pantheon", "Daniel Foré", "daily", "https://elementary.io/", "Mac benzeri zarif tasarımıyla dikkat çeken, estetik odaklı sistem.", ["Tasarım Odaklılar"], ["Kendi özel uygulama mağazası çok şık"], ["Özelleştirmeye çok kapalıdır"]),
+    ("Void Linux", "🌌", "Bağımsız", "xbps", "None", "Juan Romero Pardines", "developer", "https://voidlinux.org/download/", "systemd kullanmayan (runit kullanan), inanılmaz hızlı Unix.", ["Deneyimli Unix Severler"], ["İnanılmaz hızlı açılış"], ["Topluluğu küçüktür"]),
+    ("KDE Neon", "💡", "Ubuntu", "apt", "KDE", "KDE Project", "daily", "https://neon.kde.org/download", "KDE Plasma'nın en saf ve güncel sürümü.", ["KDE Aşıkları"], ["En son KDE özellikleri"], ["Sadece KDE araçları var"]),
+    ("Tails", "👻", "Debian", "apt", "GNOME", "Topluluk", "hack", "https://tails.net/install/index.en.html", "USB'den çalışan ve arkasında iz bırakmayan gizlilik sistemi.", ["Aktivistler"], ["Tam Tor entegrasyonu", "İz bırakmaz"], ["Gündelik kullanıma uymaz"]),
+    ("MX Linux", "🛠️", "Debian", "apt", "XFCE", "antiX", "daily", "https://mxlinux.org/download-links/", "Eski bilgisayarları dirilten harika araçlara sahip sistem.", ["Eski Bilgisayarlar"], ["MX Tools", "Hızlı"], ["Tasarım eski"]),
+    ("Garuda Linux", "🦅", "Arch Linux", "pacman", "KDE", "Shrinivas Kumbhar", "gaming", "https://garudalinux.org/downloads.html", "RGB neon tasarımıyla dikkat çeken oyuncu Arch'ı.", ["Oyuncular"], ["Neon tasarım", "Oyun araçları yüklü"], ["Çok RAM harcar"]),
+    ("Solus", "⛵", "Bağımsız", "eopkg", "Budgie", "Ikey Doherty", "daily", "https://getsol.us/download/", "Sıfırdan yazılmış ev kullanıcısı odaklı sistem.", ["Ev Kullanıcıları"], ["Eopkg çok hızlı", "Budgie harika"], ["Yazılım deposu dardır"]),
+    ("Slackware", "🦕", "Bağımsız", "slackpkg", "None", "Patrick Volkerding", "server", "http://www.slackware.com/getslack/", "Hayatta olan en eski Linux dağıtımı.", ["Tarihçiler"], ["Kaya gibi sağlam", "Klasik Unix felsefesi"], ["Bağımlılık çözmek kabustur"]),
+    ("Rocky Linux", "⛰️", "RHEL", "dnf", "None", "Gregory Kurtzer", "server", "https://rockylinux.org/download", "CentOS'un devamı niteliğindeki kurumsal dev.", ["Sunucular"], ["%100 Red Hat uyumlu"], ["Paketler çok eski"]),
+    ("Puppy Linux", "🐶", "Various", "pet", "JWM", "Barry Kauler", "daily", "https://puppylinux-os.github.io/puppylinux-website/index.html#download", "Sadece RAM üzerinde (disk olmadan) çalışan ufaklık.", ["Kurtarma CD'si"], ["Aşırı küçük ve hızlı"], ["Root olarak çalışır, güvensiz"])
 ]
 
 # We append the detailed hand-crafted distros
-for name, emoji, base, pkg, de, founder, tagline, useCases, pros, cons in more_distros_data:
+for name, emoji, base, pkg, de, founder, cat, dlink, tagline, useCases, pros, cons in more_distros_data:
     generated = {
         "id": name.lower().replace(" ", "").replace("!", "").replace("_", ""),
         "name": name,
         "icon": emoji,
+        "category": cat,
+        "downloadUrl": dlink,
         "desktops": [de.lower()] if de != "None" else ["xfce", "kde", "gnome"],
         "color": "#888888",
         "colorDim": "rgba(136,136,136,0.12)",
@@ -168,8 +173,6 @@ def fetch_from_wikipedia():
         with urllib.request.urlopen(req) as response:
             data = json.loads(response.read().decode())
             members = data.get("query", {}).get("categorymembers", [])
-            
-            # Filter out generic subcategories or non-distro articles
             distro_names = [m["title"] for m in members if "Category:" not in m["title"] and "Linux" in m["title"]]
             return distro_names
     except Exception as e:
@@ -178,31 +181,36 @@ def fetch_from_wikipedia():
 
 wiki_distros = fetch_from_wikipedia()
 
-# If API fetch fails or doesn't yield enough, generate procedural names
 if len(wiki_distros) < 400:
     for i in range(1, 501 - len(wiki_distros)):
         wiki_distros.append(f"Enterprise Linux OS Variant {i}")
 
 emojis = ["🖥️", "🐧", "🚀", "⚡", "🔮", "🌌", "🛡️", "🔥", "⚙️", "🌟", "💾", "🌍"]
 pkg_mgrs = ["apt", "rpm", "pacman", "zypper", "custom"]
+categories = ["daily", "gaming", "hack", "server", "developer"]
 
 # Add fetched distros to our main list until we hit 500 total
 for name in wiki_distros:
     if len(detailed_distros) >= 500:
         break
         
-    # Check if we already have it from the detailed list
     clean_name = name.lower().replace(" ", "").replace("linux", "")
     if any(clean_name in d["id"] for d in detailed_distros):
         continue
 
     pkg = random.choice(pkg_mgrs)
     emoji = random.choice(emojis)
+    cat = random.choice(categories)
+    
+    # Generic google search download link for API distros
+    dlink = f"https://google.com/search?q={name.replace(' ', '+')}+download+iso"
     
     generated = {
         "id": re.sub(r'[^a-z0-9]', '', clean_name)[:15],
         "name": name,
         "icon": emoji,
+        "category": cat,
+        "downloadUrl": dlink,
         "desktops": ["xfce"],
         "color": f"#{random.randint(0, 0xFFFFFF):06x}",
         "colorDim": "rgba(100,100,100,0.12)",
@@ -255,4 +263,4 @@ for name in wiki_distros:
 with open('backend/distros.json', 'w', encoding='utf-8') as f:
     json.dump(detailed_distros, f, ensure_ascii=False, indent=2)
 
-print(f"✅ Başarıyla {len(detailed_distros)} adet devasa Linux dağıtımı (Wikipedia API + El Yapımı detaylı kurulum adımlarıyla) veritabanına yazıldı!")
+print(f"✅ Başarıyla {len(detailed_distros)} adet kategorize edilmiş Linux dağıtımı veritabanına yazıldı!")

@@ -11,14 +11,35 @@ function showPanel() {
   });
 }
 
+let currentCategory = 'all';
+
 function filterDistros(query) {
-  return distros.filter(d =>
-    d.name.toLowerCase().includes(query) ||
-    d[currentLang].tags.some(t => t.toLowerCase().includes(query)) ||
-    d[currentLang].tagline.toLowerCase().includes(query) ||
-    d[currentLang].badge.toLowerCase().includes(query)
-  );
+  return distros.filter(d => {
+    const matchesSearch = d.name.toLowerCase().includes(query) ||
+      d[currentLang].tags.some(t => t.toLowerCase().includes(query)) ||
+      d[currentLang].tagline.toLowerCase().includes(query) ||
+      d[currentLang].badge.toLowerCase().includes(query);
+    
+    const matchesCategory = currentCategory === 'all' || d.category === currentCategory;
+    
+    return matchesSearch && matchesCategory;
+  });
 }
+
+function initCategoryFilters() {
+  document.querySelectorAll('.cat-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+      e.target.classList.add('active');
+      currentCategory = e.target.dataset.cat;
+      const filtered = filterDistros(currentSearch);
+      renderGrid(filtered);
+    });
+  });
+}
+
+// Ensure initCategoryFilters is called in init
+document.addEventListener('DOMContentLoaded', initCategoryFilters);
 
 function renderGrid(data) {
   const grid = document.getElementById('distroGrid');
@@ -92,6 +113,11 @@ function openModal(id) {
     </div>
     <h2 class="modal-name">${d.name}</h2>
     <p class="modal-tagline">${langObj.tagline}</p>
+    ${d.downloadUrl ? `
+    <a href="${d.downloadUrl}" target="_blank" rel="noopener noreferrer" class="download-iso-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      ${dict.download_iso || 'İndir (ISO)'}
+    </a>` : ''}
   `;
 
   let deSelectorHtml = '';
