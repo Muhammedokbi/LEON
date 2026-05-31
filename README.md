@@ -102,15 +102,7 @@ Masaüstü, tablet ve mobil cihazlarda sorunsuz çalışır. Kategori butonları
 
 ### 🎬 Tanıtım Videosu
 
-<p align="center">
-  <img src="assets/leon_preview.gif" alt="Leon Tanıtım" width="100%">
-</p>
-
-<p align="center">
-  <a href="https://github.com/Muhammedokbi/LEON/blob/main/assets/leon_demo.mp4">📹 Tam videoyu izle (HD)</a>
-</p>
-
----
+![Tanıtım Videosu](assets/leon_preview.gif)
 
 ## 🚀 Kurulum
 
