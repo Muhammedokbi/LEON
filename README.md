@@ -104,6 +104,7 @@ Masaüstü, tablet ve mobil cihazlarda sorunsuz çalışır. Kategori butonları
 <p align="center">
   <video src="assets/2026-05-31 14-49-16.mp4" alt="Leon Tanıtım Videosu" width="100%">
 </p>
+
 ---
 
 ## 🚀 Kurulum
