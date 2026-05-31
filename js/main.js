@@ -35,11 +35,26 @@ const themeBtn = document.getElementById('themeBtn');
 const sun = document.getElementById('sunIcon');
 const moon = document.getElementById('moonIcon');
 
+// Detect saved or OS preference on load
+(function initTheme() {
+  const saved = localStorage.getItem('leon-theme');
+  if (saved) {
+    document.documentElement.setAttribute('data-theme', saved);
+  } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }
+  const current = document.documentElement.getAttribute('data-theme');
+  sun.style.display = current === 'dark' ? 'block' : 'none';
+  moon.style.display = current === 'dark' ? 'none' : 'block';
+})();
+
 themeBtn.addEventListener('click', () => {
-  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-  document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
-  sun.style.display = isDark ? 'none' : 'block';
-  moon.style.display = isDark ? 'block' : 'none';
+  const current = document.documentElement.getAttribute('data-theme');
+  const next = current === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('leon-theme', next);
+  sun.style.display = next === 'dark' ? 'block' : 'none';
+  moon.style.display = next === 'dark' ? 'none' : 'block';
 });
 
 // MAIN BUTTON

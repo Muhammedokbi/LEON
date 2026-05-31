@@ -15,12 +15,15 @@ let currentCategory = 'all';
 
 function filterDistros(query) {
   return distros.filter(d => {
-    const matchesSearch = d.name.toLowerCase().includes(query) ||
-      d[currentLang].tags.some(t => t.toLowerCase().includes(query)) ||
-      d[currentLang].tagline.toLowerCase().includes(query) ||
-      d[currentLang].badge.toLowerCase().includes(query);
+    const lang = d[currentLang] || {};
+    const tags = lang.tags || [];
+    const matchesSearch = !query || 
+      d.name.toLowerCase().includes(query) ||
+      tags.some(t => (t || '').toLowerCase().includes(query)) ||
+      (lang.tagline || '').toLowerCase().includes(query) ||
+      (lang.badge || '').toLowerCase().includes(query);
     
-    const matchesCategory = currentCategory === 'all' || d.category === currentCategory;
+    const matchesCategory = currentCategory === 'all' || (d.category || '') === currentCategory;
     
     return matchesSearch && matchesCategory;
   });

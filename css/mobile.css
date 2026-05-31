@@ -45,4 +45,23 @@
   .modal-meta-grid { grid-template-columns: 1fr; gap: 0.5rem; }
   .step { padding: 0.7rem; gap: 0.6rem; }
   .step-text { font-size: 0.75rem; }
+
+  .category-filters {
+    padding: 0 0 0.8rem;
+    margin-bottom: 0.8rem;
+    gap: 0.4rem;
+    -webkit-overflow-scrolling: touch;
+  }
+  .cat-btn {
+    padding: 0.45rem 0.9rem;
+    font-size: 0.7rem;
+    border-radius: 16px;
+  }
+
+  .download-iso-btn {
+    padding: 0.7rem 1.4rem;
+    font-size: 0.85rem;
+    width: 100%;
+    justify-content: center;
+  }
 }

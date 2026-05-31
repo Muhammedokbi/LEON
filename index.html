@@ -1,118 +1,127 @@
 <!DOCTYPE html>
 <html lang="tr" data-theme="light">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Leon — Linux Documentation</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/base.css?v=6.0">
-<link rel="stylesheet" href="css/layout.css?v=6.0">
-<link rel="stylesheet" href="css/components.css?v=6.0">
-<link rel="stylesheet" href="css/mobile.css?v=6.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leon — Linux Documentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@400;600;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css?v=6.0">
+  <link rel="stylesheet" href="css/layout.css?v=6.0">
+  <link rel="stylesheet" href="css/components.css?v=6.0">
+  <link rel="stylesheet" href="css/mobile.css?v=6.0">
 </head>
+
 <body>
 
-<div class="version-tag" data-i18n="hero_tag">Documentation System v6.0 (Encyclopedia Edition)</div>
-<div class="bg-grid"></div>
+  <div class="version-tag" data-i18n="hero_tag">Documentation System v9.0</div>
+  <div class="bg-grid"></div>
 
-<!-- HEADER -->
-<header>
-  <div class="logo">
-    <div class="logo-dot"></div>
-    Leon
-  </div>
-  <div class="header-right">
-    <div class="search-wrap">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-      </svg>
-      <input type="text" id="searchInput" data-i18n-placeholder="search_placeholder" placeholder="dağıtım ara..." autocomplete="off">
+  <!-- HEADER -->
+  <header>
+    <div class="logo">
+      <div class="logo-dot"></div>
+      Leon
     </div>
-    <button class="lang-btn" id="langBtn" aria-label="Dili değiştir / Change language">
-      EN
-    </button>
-    <button class="theme-btn" id="themeBtn" aria-label="Tema değiştir">
-      <svg id="sunIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none">
-        <circle cx="12" cy="12" r="5"/><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
-      </svg>
-      <svg id="moonIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-      </svg>
-    </button>
-  </div>
-</header>
-
-<!-- HERO -->
-<section id="hero">
-  <div class="corner corner-tl"></div>
-  <div class="corner corner-br"></div>
-  <div class="float-nums" id="floatNums"></div>
-
-  <h1 class="hero-title">
-    LEON
-    <span data-i18n="hero_title_sub">Linux Enterprise Open Network</span>
-  </h1>
-
-  <div class="btn-3d-wrap">
-    <button id="mainBtn" aria-label="Linux dağıtımlarını keşfet">
-      <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-      </svg>
-      <span data-i18n="explore_btn">Dağıtımları Keşfet</span>
-    </button>
-  </div>
-</section>
-
-<!-- DISTROS PANEL -->
-<div id="distrosPanel">
-  <div class="panel-header">
-    <div>
-      <h2 class="panel-title" data-i18n="panel_title">Linux <span>Dağıtımları</span></h2>
-      <p class="result-count"><b id="resultNum">8</b> <span data-i18n="results_found">dağıtım bulundu</span></p>
+    <div class="header-right">
+      <div class="search-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8" />
+          <path d="m21 21-4.35-4.35" />
+        </svg>
+        <input type="text" id="searchInput" data-i18n-placeholder="search_placeholder" placeholder="dağıtım ara..."
+          autocomplete="off">
+      </div>
+      <button class="lang-btn" id="langBtn" aria-label="Dili değiştir / Change language">
+        EN
+      </button>
+      <button class="theme-btn" id="themeBtn" aria-label="Tema değiştir">
+        <svg id="sunIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none">
+          <circle cx="12" cy="12" r="5" />
+          <path
+            d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+        </svg>
+        <svg id="moonIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+        </svg>
+      </button>
     </div>
-    <button class="back-btn" id="backBtn">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
-        <path d="M19 12H5M12 19l-7-7 7-7"/>
-      </svg>
-      <span data-i18n="back_btn">Ana Sayfaya Dön</span>
-    </button>
-  </div>
-  
-  <div class="category-filters" id="categoryFilters">
-    <button class="cat-btn active" data-cat="all" data-i18n="cat_all">Tümü</button>
-    <button class="cat-btn" data-cat="daily" data-i18n="cat_daily">Gündelik</button>
-    <button class="cat-btn" data-cat="gaming" data-i18n="cat_gaming">Oyun</button>
-    <button class="cat-btn" data-cat="hack" data-i18n="cat_hack">Siber Güvenlik</button>
-    <button class="cat-btn" data-cat="server" data-i18n="cat_server">Sunucu</button>
-    <button class="cat-btn" data-cat="developer" data-i18n="cat_developer">Geliştirici</button>
+  </header>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="corner corner-tl"></div>
+    <div class="corner corner-br"></div>
+    <div class="float-nums" id="floatNums"></div>
+
+    <h1 class="hero-title">
+      LEON
+      <span data-i18n="hero_title_sub">Linux Enterprise Open Network</span>
+    </h1>
+
+    <div class="btn-3d-wrap">
+      <button id="mainBtn" aria-label="Linux dağıtımlarını keşfet">
+        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+        </svg>
+        <span data-i18n="explore_btn">Dağıtımları Keşfet</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- DISTROS PANEL -->
+  <div id="distrosPanel">
+    <div class="panel-header">
+      <div>
+        <h2 class="panel-title" data-i18n="panel_title">Linux <span>Dağıtımları</span></h2>
+        <p class="result-count"><b id="resultNum">8</b> <span data-i18n="results_found">dağıtım bulundu</span></p>
+      </div>
+      <button class="back-btn" id="backBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+          <path d="M19 12H5M12 19l-7-7 7-7" />
+        </svg>
+        <span data-i18n="back_btn">Ana Sayfaya Dön</span>
+      </button>
+    </div>
+
+    <div class="category-filters" id="categoryFilters">
+      <button class="cat-btn active" data-cat="all" data-i18n="cat_all">Tümü</button>
+      <button class="cat-btn" data-cat="daily" data-i18n="cat_daily">Gündelik</button>
+      <button class="cat-btn" data-cat="gaming" data-i18n="cat_gaming">Oyun</button>
+      <button class="cat-btn" data-cat="hack" data-i18n="cat_hack">Siber Güvenlik</button>
+      <button class="cat-btn" data-cat="server" data-i18n="cat_server">Sunucu</button>
+      <button class="cat-btn" data-cat="developer" data-i18n="cat_developer">Geliştirici</button>
+    </div>
+
+    <div class="distro-grid" id="distroGrid"></div>
+    <div class="no-results" id="noResults">
+      <div class="nr-icon">🔍</div>
+      <h3 data-i18n="no_results">Sonuç bulunamadı</h3>
+      <p data-i18n="no_results_desc">Arama teriminizi değiştirmeyi deneyin.</p>
+    </div>
   </div>
 
-  <div class="distro-grid" id="distroGrid"></div>
-  <div class="no-results" id="noResults">
-    <div class="nr-icon">🔍</div>
-    <h3 data-i18n="no_results">Sonuç bulunamadı</h3>
-    <p data-i18n="no_results_desc">Arama teriminizi değiştirmeyi deneyin.</p>
+  <!-- MODAL -->
+  <div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true">
+    <div class="modal" id="modal">
+      <button class="modal-close" id="modalClose" aria-label="Kapat">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M18 6 6 18M6 6l12 12" />
+        </svg>
+      </button>
+      <div class="modal-hero" id="modalHero"></div>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
   </div>
-</div>
 
-<!-- MODAL -->
-<div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true">
-  <div class="modal" id="modal">
-    <button class="modal-close" id="modalClose" aria-label="Kapat">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-        <path d="M18 6 6 18M6 6l12 12"/>
-      </svg>
-    </button>
-    <div class="modal-hero" id="modalHero"></div>
-    <div class="modal-body" id="modalBody"></div>
-  </div>
-</div>
-
-<script src="js/data.js" defer></script>
-<script src="js/physics.js" defer></script>
-<script src="js/ui.js" defer></script>
-<script src="js/main.js" defer></script>
+  <script src="js/data.js?v=6.0" defer></script>
+  <script src="js/physics.js?v=6.0" defer></script>
+  <script src="js/ui.js?v=6.0" defer></script>
+  <script src="js/main.js?v=6.0" defer></script>
 </body>
+
 </html>
